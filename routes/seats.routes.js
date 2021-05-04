@@ -23,6 +23,15 @@ router.route('/seats').post((req, res) => {
   return res.json(testimonial);
 });
 
+// router.route('/seats').post((req, res) => {
+//   if (db.seats.some() == zarezerwowane) {
+//     return res.status(404).json({ message: "The slot is already taken..." });
+//   } else {
+//     db.seats.push(testimonial);
+//     return res.json(testimonial);
+//   }
+// });
+
 router.route('/seats/:id').delete((req, res) => {
   db.seats = db.seats.map(item => {
     if (item.id == req.params.id) {
