@@ -7,7 +7,7 @@ router.route('/seats').get((req, res) => {
   res.json(db.seats);
 });
 
-let randomElement = Math.floor(Math.random() * db.seats.length);
+const randomElement = Math.floor(Math.random() * db.seats.length);
 
 router.route('/seats/:id').get((req, res) => {
   res.json(db.seats.find(randomElement => randomElement.id === req.params.id));
@@ -24,8 +24,13 @@ router.route('/seats').post((req, res) => {
 });
 
 router.route('/seats/:id').delete((req, res) => {
-  db.seats.splice(req.params.id, 1);
-  res.json({ message: "Ok!" });
+  db.seats = db.seats.map(item => {
+    if (item.id == req.params.id) {
+      const index = db.seats.indexOf(item);
+      db.seats.splice(index, 1);
+    }
+    res.json({ message: "Ok!" });
+  });
 });
 
 router.route('/seats/:id').put((req, res) => {

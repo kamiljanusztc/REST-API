@@ -7,7 +7,7 @@ router.route('/testimonials').get((req, res) => {
   res.json(db.testimonials);
 });
 
-let randomElement = Math.floor(Math.random() * db.testimonials.length);
+const randomElement = Math.floor(Math.random() * db.testimonials.length);
 
 router.route('/testimonials/:id').get((req, res) => {
   res.json(db.testimonials.find(randomElement => randomElement.id === req.params.id));
@@ -43,8 +43,13 @@ router.route('/testimonials/:id').put((req, res) => {
 });
 
 router.route('/testimonials/:id').delete((req, res) => {
-  db.testimonials.splice(req.params.id, 1);
-  res.json({ message: "Ok!" });
+  db.testimonials = db.testimonials.map(item => {
+    if (item.id == req.params.id) {
+      const index = db.testimonials.indexOf(item);
+      db.testimonials.splice(index, 1);
+    }
+    res.json({ message: "Ok!" });
+  });
 });
 
 module.exports = router;

@@ -7,7 +7,7 @@ router.route('/concerts').get((req, res) => {
   res.json(db.concerts);
 });
 
-let randomElement = Math.floor(Math.random() * db.concerts.length);
+const randomElement = Math.floor(Math.random() * db.concerts.length);
 
 router.route('/concerts/:id').get((req, res) => {
   res.json(db.concerts.find(randomElement => randomElement.id === req.params.id));
@@ -24,8 +24,13 @@ router.route('/concerts').post((req, res) => {
 });
 
 router.route('/concerts/:id').delete((req, res) => {
-  db.concerts.splice(req.params.id, 1);
-  res.json({ message: "Ok!" });
+  db.concerts = db.concerts.map(item => {
+    if (item.id == req.params.id) {
+      const index = db.concerts.indexOf(item);
+      db.concerts.splice(index, 1);
+    }
+    res.json({ message: "Ok!" });
+  });
 });
 
 router.route('/concerts/:id').put((req, res) => {
