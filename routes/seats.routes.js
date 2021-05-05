@@ -14,37 +14,36 @@ router.route('/seats/:id').get((req, res) => {
 });
 
 router.route('/seats').post((req, res) => {
-  const testimonial = {
-    id: uuidv4(),
-    author: req.body.author,
-    text: req.body.text,
+  const seatInUse = db.seats.find(item => item.seat == req.body.seat && item.day == req.body.day);
+  if (seatInUse) {
+    return res.status(400).json({ message: "The slot is already taken..." })
+  } else {
+    const seat = {
+      id: uuidv4(),
+      client: req.body.client,
+      day: req.body.day,
+      email: req.body.email,
+      seat: req.body.seat
+    }
+    db.seats.push(seat);
+    return res.json(seat);
   }
-  db.seats.push(testimonial);
-  return res.json(testimonial);
 });
 
-// router.route('/seats').post((req, res) => {
-//   if (db.seats.some() == zarezerwowane) {
-//     return res.status(404).json({ message: "The slot is already taken..." });
-//   } else {
-//     db.seats.push(testimonial);
-//     return res.json(testimonial);
-//   }
-// });
-
 router.route('/seats/:id').delete((req, res) => {
-  db.seats = db.seats.map(item => {
-    if (item.id == req.params.id) {
-      const index = db.seats.indexOf(item);
+  const index = db.seats.findIndex(item => item.id === req.params.id);
+
+    if (index === -1) {
+      res.status(404).json({ message: 'Not found' });
+    } else {
       db.seats.splice(index, 1);
+      res.json({ message: "Ok!" });
     }
-    res.json({ message: "Ok!" });
-  });
 });
 
 router.route('/seats/:id').put((req, res) => {
   db.seats = db.seats.map(item => {
-    if (item.id == req.params.id) {
+    if (item.id === req.params.id) {
       return {
         id: req.params.id,
         author: req.body.author,

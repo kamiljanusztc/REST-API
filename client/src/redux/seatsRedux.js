@@ -54,6 +54,7 @@ export const addSeatRequest = (seat) => {
       let res = await axios.post(`${API_URL}/seats`, seat);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch(addSeat(res));
+      dispatch(loadSeatsRequest());
       dispatch(endRequest({ name: 'ADD_SEAT' }));
 
     } catch(e) {

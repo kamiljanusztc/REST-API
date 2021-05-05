@@ -14,32 +14,39 @@ router.route('/concerts/:id').get((req, res) => {
 });
 
 router.route('/concerts').post((req, res) => {
-  const testimonial = {
+  const concerts = {
     id: uuidv4(),
-    author: req.body.author,
-    text: req.body.text,
+    performer: req.body.performer,
+    genre: req.body.genre,
+    price: req.body.price,
+    day: req.body.day,
+    image: req.body.image
   }
-  db.concerts.push(testimonial);
-  return res.json(testimonial);
+  db.concerts.push(concerts);
+  return res.json(concerts);
 });
 
-router.route('/concerts/:id').delete((req, res) => {
-  db.concerts = db.concerts.map(item => {
-    if (item.id == req.params.id) {
-      const index = db.concerts.indexOf(item);
-      db.concerts.splice(index, 1);
+router.route('/concertss/:id').delete((req, res) => {
+  const index = db.concertss.findIndex(item => item.id === req.params.id);
+
+    if (index === -1) {
+      res.status(404).json({ message: 'Not found' });
+    } else {
+      db.concertss.splice(index, 1);
+      res.json({ message: "Ok!" });
     }
-    res.json({ message: "Ok!" });
-  });
 });
 
 router.route('/concerts/:id').put((req, res) => {
   db.concerts = db.concerts.map(item => {
-    if (item.id == req.params.id) {
+    if (item.id === req.params.id) {
       return {
-        id: req.params.id,
-        author: req.body.author,
-        text: req.body.text,
+        id: uuidv4(),
+        performer: req.body.performer,
+        genre: req.body.genre,
+        price: req.body.price,
+        day: req.body.day,
+        image: req.body.image
       };
     } else {
       return item;

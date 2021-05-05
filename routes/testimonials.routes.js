@@ -29,7 +29,7 @@ router.route('/testimonials').post((req, res) => {
 
 router.route('/testimonials/:id').put((req, res) => {
   db.testimonials = db.testimonials.map(item => {
-    if (item.id == req.params.id) {
+    if (item.id === req.params.id) {
       return {
         id: req.params.id,
         author: req.body.author,
@@ -43,13 +43,14 @@ router.route('/testimonials/:id').put((req, res) => {
 });
 
 router.route('/testimonials/:id').delete((req, res) => {
-  db.testimonials = db.testimonials.map(item => {
-    if (item.id == req.params.id) {
-      const index = db.testimonials.indexOf(item);
+  const index = db.testimonials.findIndex(item => item.id === req.params.id);
+
+    if (index === -1) {
+      res.status(404).json({ message: 'Not found' });
+    } else {
       db.testimonials.splice(index, 1);
+      res.json({ message: "Ok!" });
     }
-    res.json({ message: "Ok!" });
-  });
 });
 
 module.exports = router;
