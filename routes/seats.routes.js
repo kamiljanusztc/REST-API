@@ -26,6 +26,7 @@ router.route('/seats').post((req, res) => {
       seat: req.body.seat
     }
     db.seats.push(seat);
+    req.io.emit('seatsUpdated', db.seats);
     return res.json(seat);
   }
 });
