@@ -1,4 +1,3 @@
-[
-  { "id": 1, "author": "John Doe", "text": "This company is worth every coin!" },
-  { "id": 2, "author": "Amanda Doe", "text": "They really know how to make you happy." }
-]
+{"_id":{"$oid":"60a553e4217cff17d9e37a8d"},"author":"John Doe","text":"This company is worth every coin!"}
+{"_id":{"$oid":"60a553e4217cff17d9e37a8e"},"author":"Amanda Doe","text":"They really know how to make you happy."}
+{"_id":{"$oid":"60a576caee702b6f5926f85f"},"author":"John Davis","text":"Lorem ipsum","__v":0}
