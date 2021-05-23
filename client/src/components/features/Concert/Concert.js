@@ -16,6 +16,7 @@ const Concert = ({ performer, price, genre, day, image }) => (
           <img className="concert__info__back" src={image} alt={performer}/>
           <h2 className="concert__info__performer">{ performer }</h2>
           <h3 className="concert__info__genre">{ genre }</h3>
+          <p className="concert__info__tickets">Only 20 tickets left</p>
           <p className="concert__info__day-n-price">Day: {day}, Price: { price }$</p>
         </div>
       </Col>
