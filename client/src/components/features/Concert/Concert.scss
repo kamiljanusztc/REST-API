@@ -26,6 +26,14 @@
   &__info {
     margin: 2rem;
 
+    &__tickets {
+      opacity: 0.8;
+      font-size: 0.9rem;
+      position: absolute;
+      bottom: 3rem;
+      left: 1.5rem;
+    }
+
     &__back {
       position: absolute;
       opacity: 0.4;
@@ -71,6 +79,7 @@
   &:hover .concert__image-container__img {
     transform: scale(1.1);
   }
+
 }
 
 @media (max-width: 768px) {
@@ -85,11 +94,4 @@
     opacity: 0.7;
   }
 
-  .concert__info__tickets {
-    opacity: 0.8;
-    font-size: 0.9rem;
-    position: absolute;
-    bottom: 3rem;
-    left: 1.5rem;
-  }
 }

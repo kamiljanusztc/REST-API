@@ -9,7 +9,7 @@ router.get('/concerts/:id/tickets', ConcertController.getByTickets);
 router.get('/concerts/performer/:performer', ConcertController.getByPerformer);
 router.get('/concerts/genre/:genre', ConcertController.getByGenre);
 router.get('/concerts/price/:price_min/:price_max', ConcertController.getByPrice);
-router.get('/concerts/price/day/:day', ConcertController.getByDay);
+router.get('/concerts/day/:day', ConcertController.getByDay);
 router.post('/concerts', ConcertController.addConcert);
 router.put('/concerts/:id', ConcertController.updateById);
 router.delete('/concerts/:id', ConcertController.deleteById);

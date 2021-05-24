@@ -30,8 +30,8 @@ describe('POST /api/concerts', () => {
     expect(newConcert).to.not.be.null;
   });
 
-  // after(async () => {
-  //   await Concert.deleteMany();
-  // });
+  after(async () => {
+    await Concert.deleteMany();
+  });
 
 });

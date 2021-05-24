@@ -41,6 +41,7 @@ exports.getById = async (req, res) => {
 exports.getByTickets = async (req, res) => {
   try {
     const concert = await Concert.findById(req.params.id);
+    console.log(concert);
     const soldSeats = await Seat.find({ day: concert.day });
     const freeTickets = 50 - soldSeats.length;
     if (!concert) res.status(404).json({ message: "Not found" });
@@ -55,11 +56,12 @@ exports.getByTickets = async (req, res) => {
 exports.getByPerformer = async (req, res) => {
 
   try {
-    const concert = await Concert.findById(req.params.performer);
+    const concert = await Concert.find({ performer: req.params.performer });
     if(!concert) res.status(404).json({ message: 'Not found' });
     else res.json(concert);
   }
   catch(err) {
+    console.error(err);
     res.status(500).json({ message: err });
   }
 
@@ -68,11 +70,13 @@ exports.getByPerformer = async (req, res) => {
 exports.getByGenre = async (req, res) => {
 
   try {
-    const concert = await Concert.findById(req.params.genre);
+    const concert = await Concert.find({ genre: req.params.genre });
+    console.log(concert);
     if(!concert) res.status(404).json({ message: 'Not found' });
     else res.json(concert);
   }
   catch(err) {
+    console.error(err);
     res.status(500).json({ message: err });
   }
 
@@ -81,7 +85,8 @@ exports.getByGenre = async (req, res) => {
 exports.getByPrice = async (req, res) => {
 
   try {
-    const concert = await Concert.findById(req.params.price_max);
+    const concert = await Concert.find({ price: {$gte: req.params.price_min, $lte: req.params.price_max } });
+    console.log(concert);
     if(!concert) res.status(404).json({ message: 'Not found' });
     else res.json(concert);
   }
@@ -94,7 +99,7 @@ exports.getByPrice = async (req, res) => {
 exports.getByDay = async (req, res) => {
 
   try {
-    const concert = await Concert.findById(req.params.day);
+    const concert = await Concert.find( { day: req.params.day });
     if(!concert) res.status(404).json({ message: 'Not found' });
     else res.json(concert);
   }

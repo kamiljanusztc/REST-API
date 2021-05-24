@@ -31,8 +31,8 @@ describe('PUT /api/concerts', () => {
     expect(updatedConcert.performer).to.be.equal('Amanda Doe');
   });
 
-  // after(async () => {
-  //   await Concert.deleteMany();
-  // });
+  after(async () => {
+    await Concert.deleteMany();
+  });
 
 });

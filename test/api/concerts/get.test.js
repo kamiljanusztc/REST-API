@@ -67,16 +67,16 @@ describe('GET /api/concerts', () => {
   it('/:id/tickets should return one concert by :id and free tickets', async () => {
     const res = await request(server).get('/api/concerts/60a553f6217cff17d9e37a8f/tickets');
 
-    const soldTickets = await Seat.find({ day: res.body.concert });
+    const soldTickets = await Seat.find({ day: res.body.concert.day });
     const freeTickets = 50 - soldTickets.length;
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('object').to.have.property('freeTickets');
     expect(res.body).to.not.be.null;
-    expect(res.body).to.be.equal(freeTickets);
+    expect(res.body.freeTickets).to.be.equal(freeTickets);
   });
 
   it('/performer/:performer should return one concert by performer', async () => {
-    const res = await request(server).get('/api/concerts/performer/John+Doe');
+    const res = await request(server).get('/api/concerts/performer/John%20Doe');
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body).to.not.be.null;
@@ -92,22 +92,22 @@ describe('GET /api/concerts', () => {
   it('/price/:price_min/:price_max should return one concert by price', async () => {
     const minPrice = 25;
     const maxPrice = 40;
-    const res = await request(server).get('/api/concerts/price/${minPrice}/${maxPrice}');
+    const res = await request(server).get('/api/concerts/price/25/40');
     expect(res.status).to.be.equal(200);
-    expect(res.body).to.be.an('array').to.have.lengthOf(2);
+    expect(res.body).to.be.an('array');
     expect(res.body).to.not.be.null;
   });
 
-  it('/price/day/:day should return one concert by day', async () => {
-    const res = await request(server).get('/api/concerts/price/day/1');
+  it('/day/:day should return one concert by day', async () => {
+    const res = await request(server).get('/api/concerts/day/1');
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
     expect(res.body).to.not.be.null;
   });
   
-  // after(async () => {
-  //   await Concert.deleteMany();
-  //   await Seat.deleteMany();
-  // });
+  after(async () => {
+    await Concert.deleteMany();
+    await Seat.deleteMany();
+  });
 
 });
