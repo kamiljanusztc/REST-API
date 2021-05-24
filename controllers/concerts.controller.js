@@ -1,4 +1,5 @@
 const Concert = require('../models/concert.model');
+const Seat = require('../models/seat.model');
 
 exports.getAll = async (req, res) => {
   try {
@@ -45,7 +46,9 @@ exports.getByTickets = async (req, res) => {
     if (!concert) res.status(404).json({ message: "Not found" });
     else res.json({ concert, freeTickets });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: err });
+
   }
 };
 

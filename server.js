@@ -36,18 +36,12 @@ app.use((req, res) => {
   res.status(404).send('404 not found...');
 })
 
-// connects our backend code with the database
-// mongoose.connect('mongodb+srv://kamil_janusz:-71limak71-@cluster0.uwrti.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-// const db = mongoose.connection;
-// mongoose.connect
-
-
 const determineDbUri = (envType) => {
   switch (envType) {
     case 'production':
       return 'mongodb+srv://${process.env.NewWaveUser}:${process.env.NewWaveApp}@cluster0.uwrti.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
     case "test":
-      return 'mongodb://localhost:27017/NewWaveDBTest';
+      return 'mongodb://localhost:27017/NewWaveDB';
     default:
       return 'mongodb://localhost:27017/NewWaveDB';
   }

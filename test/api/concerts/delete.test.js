@@ -31,7 +31,7 @@ describe('DELETE /api/concerts', () => {
     expect(deletedConcert).to.be.null;
   });
 
-  after(async () => {
-    await Concert.deleteMany();
-  });
+  // after(async () => {
+  //   await Concert.deleteMany();
+  // });
 });
