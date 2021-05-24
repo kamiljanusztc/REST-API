@@ -16,7 +16,7 @@
     "cors": "^2.8.5",
     "create-react-app": "^4.0.3",
     "express": "4.17.1",
-    "helmet": "3.21.1",
+    "helmet": "3.23.3",
     "mocha": "6.2.1",
     "mongo-sanitize": "1.0.1",
     "mongodb": "3.3.2",
