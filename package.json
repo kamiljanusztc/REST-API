@@ -10,7 +10,7 @@
     "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
   },
   "dependencies": {
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.0",
     "chai": "4.2.0",
     "chai-http": "4.3.0",
     "cors": "^2.8.5",
