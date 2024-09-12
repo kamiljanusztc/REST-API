@@ -15,7 +15,7 @@
     "chai-http": "4.3.0",
     "cors": "^2.8.5",
     "create-react-app": "^4.0.3",
-    "express": "4.17.1",
+    "express": "4.21.0",
     "helmet": "3.21.1",
     "mocha": "6.2.1",
     "mongo-sanitize": "1.0.1",
